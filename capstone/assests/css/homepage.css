@@ -21,6 +21,7 @@ header {
 .logo img {
     width: 4rem;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .search-bar {
@@ -76,14 +77,18 @@ nav ul {
 nav li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 30px;
+    font-size: 18px;
     display: inline-block;
+    padding: 4px 8px;
 }
 
 nav li:hover a{
     color: #000;
-    background-color: #ccc;
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.2);
 } 
 
 section {
@@ -161,4 +166,47 @@ pre {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+/* Footer styles */
+footer {
+    background-color: #4d4d4d;
+    color: white;
+    padding: 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.footer-links a {
+    margin-right: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-about, .footer-follow {
+    margin-right: 20px;
+}
+
+.footer-follow a i {
+    padding: 12px;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.footer-follow a i:hover {
+    color: red;
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    cursor: default;
 }
