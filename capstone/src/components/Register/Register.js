@@ -11,6 +11,9 @@ function SignUpForm() {
   const handleLoginClick = () => {
     navigate('/login');
   };
+  const handleVerifyClick = () => {
+    navigate('/verify');
+  };
   return (
     <div className={styles.container}>
       <div className={styles.signupBox}>
@@ -50,7 +53,7 @@ function SignUpForm() {
             <input type="tel" placeholder="Enter your phone number" required />
             <span className={styles.icon}><FontAwesomeIcon icon={faPhone} /></span>
           </div>
-          <button type="submit" className={styles.btn}>Sign up</button>
+          <button type="submit" className={styles.btn} onClick={handleVerifyClick}>Sign up</button>
           <div className={styles.loginLink}>
             <p>Bạn đã có tài khoản, <a href="#" onClick={handleLoginClick}>Đăng Nhập</a>.</p>
           </div>

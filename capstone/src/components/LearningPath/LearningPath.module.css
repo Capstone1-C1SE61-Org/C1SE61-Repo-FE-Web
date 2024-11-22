@@ -1,29 +1,27 @@
-/* General reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: #f2f2f2;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 60px;
+    background-color: white;
+    border-bottom: 2px solid #d19b83;
+}
 
 .logoImg {
     width: 4rem;
     border-radius: 50%;
     cursor: pointer;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #d4b1b2;
-    padding: 10px 20px;
 }
 
 .searchBar {
@@ -33,7 +31,7 @@ body {
 
 .searchBar input {
     width: 100%;
-    padding: 10px 40px 10px 10px;
+    padding: 10px 40px 10px 10px; /* Khoảng trống phải để chứa biểu tượng */
     border-radius: 25px;
     border: 1px solid #ccc;
     font-size: 16px;
@@ -44,124 +42,110 @@ body {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
 }
 
-.icons {
-  display: flex;
-  align-items: center;
-}
-.icons a {
-  margin-left: 20px;
-  font-size: 20px;
-  color: #666;
-  text-decoration: none;
-}
-
-/* Main Content */
-.Container {
-    display: flex;
-    padding: 20px;
-    min-height: 100vh;
-  }
-  .mainContent {
-    flex: 3;
-    margin-right: 20px;
-  }
-  .lessonHeader {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 30px;
-  }
-  .lesson video {
-    width: 100%;
-    border-radius: 10px;
-  }
-
-  h2 {
-    text-align: left;
-  }
-  
-  /* Sidebar */
-
-h3{
-    text-align: center;
-}
-
-  .sidebar {
-    flex: 1;
-    background-color: #e0e0e0;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  .sidebar ul li {
-    background-color: #d0d0d0;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-
-  .sidebar ul li:hover {
-    background-color: #c0c0c0;
-}
-
-  .sidebar button {
-    background-color: #8a6de9;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
-
-  .sidebar button:hover {
-    background-color: #7a5dd9;
-    cursor: pointer;
-}
-
-  .navBut {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    align-items: center;
-  }
-
-  .navBut {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    align-items: center;
-  }
-  .navButtons button {
-    background-color: #d1c4e9;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .navBut .navButtons{
+.authButtons {
     display: flex;
     gap: 10px;
-  }
-
-  .navButtons :hover{
-    background-color: #c0b4d9;
-  }
-
-  .navBut .help {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
 }
 
+.authButtons .loginBtn, 
+.authButtons .signupBtn {
+    padding: 8px 12px;
+    background-color: #d19b83;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.signupBtn {
+    background-color: #c9b2d6;
+}
+
+nav {
+    background-color: #d19b83;
+    padding: 10px 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 30px;
+    font-size: 18px;
+    display: inline-block;
+    padding: 4px 8px;
+}
+
+nav li:hover a{
+    color: #000;
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.2);
+} 
+.Container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.Container h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.Container p {
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+.card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.card img {
+    height: 100px;
+    margin-right: 20px;
+}
+.card h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.card .icons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.card .icons a {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #666;
+    text-decoration: none;
+}
+.card button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
 footer {
     background-color: #4d4d4d;
     color: white;

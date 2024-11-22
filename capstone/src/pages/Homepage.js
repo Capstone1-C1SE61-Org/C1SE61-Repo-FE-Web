@@ -7,7 +7,7 @@ import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-ico
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function HomePage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLogoClick = () => {
     navigate('/')
   };
@@ -22,6 +22,9 @@ function HomePage() {
   }
   const handleLearnClick = () => {
     navigate('/learn');
+  }
+  const handleLearningPath = () => {
+    navigate('/learnpath');
   }
 
   return (
@@ -48,7 +51,7 @@ function HomePage() {
         <ul>
           <li onClick={handleLogoClick}><a href="#">Trang chủ</a></li>
           <li onClick={handleCourseDetailClick}><a href="#">Khóa học</a></li>
-          <li><a href="#">Lộ trình học tập</a></li>
+          <li onClick={handleLearningPath}><a href="#">Lộ trình học tập</a></li>
           <li><a href="#">Chia sẻ kiến thức</a></li>
         </ul>
       </nav>
