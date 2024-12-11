@@ -57,7 +57,6 @@ header {
     border-radius: 5px;
     cursor: pointer;
     color: white;
-    text-decoration: none;
 }
 
 .signupBtn {
@@ -91,107 +90,62 @@ nav li:hover a{
     -webkit-transform: scale(1.5);
     transform: scale(1.2);
 } 
-
-.icons {
+.Container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.Container h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.Container p {
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+.card {
     display: flex;
     align-items: center;
-    gap: 10px;
-  }
-  .icons a {
-    margin-left: 20px;
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.card img {
+    height: 100px;
+    margin-right: 20px;
+}
+.card h2 {
     font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.card .icons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.card .icons a {
+    font-size: 20px;
+    margin-right: 10px;
     color: #666;
     text-decoration: none;
 }
-
-section {
-    padding: 40px;
-    position: relative;
-}
-
-.titleBox {
-    position: absolute;
-    top: 120px;
-    left: 200px;
-}
-
-.htmlSection {
-    height: 400px;
-    background-color: #9e70b1;
-    padding: 20px;
-}
-
-.cssSection {
-    background-color: #f4e1c9;
-    height: 400px;
-    padding: 20px;
-    position: relative;
-}
-
-.JavaScriptSection {
-    background-color: pink;
-    height: 400px;
-    padding: 20px;
-    position: relative;
-}
-
-.JavaSection {
-    background-color: green;
-    height: 400px;
-    padding: 20px;
-    position: relative;
-}
-section h1 {
-    font-size: 36px;
-
-}
-
-section p {
-    margin: 10px 0;
-    font-size: 18px;
-}
-
-.learnBtn {
+.card button {
     padding: 10px 20px;
-    background-color: black;
-    color: white;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-.codeExample {
-    position: absolute;
-    top: 50px; 
-    right: 50px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 300px;
-    width: 350px;
-}
-
-pre {
-    font-family: monospace;
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    height: 200px;
-}
-
-.tryBtn {
-    background-color: #665a87;
-    color: white;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 5px;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
     cursor: pointer;
 }
-
-
 footer {
     background-color: #4d4d4d;
     color: white;

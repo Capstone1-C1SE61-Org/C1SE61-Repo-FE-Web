@@ -44,7 +44,7 @@ body {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
+    font-size: 20px;    
 }
 
 .icons {
@@ -58,108 +58,66 @@ body {
   text-decoration: none;
 }
 
-/* Main Content */
-.Container {
-    display: flex;
+.sidebar {
+    width: 200px;
+    background-color: #f8f8f8;
     padding: 20px;
-    min-height: 100vh;
-  }
-  .mainContent {
-    flex: 3;
-    margin-right: 20px;
-  }
-  .lessonHeader {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 30px;
-  }
-  .lesson video {
-    width: 100%;
-    border-radius: 10px;
-  }
-
-  h2 {
-    text-align: left;
-  }
-  
-  /* Sidebar */
-
-h3{
-    text-align: center;
-}
-
-  .sidebar {
-    flex: 1;
-    background-color: #e0e0e0;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  .sidebar ul li {
-    background-color: #d0d0d0;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-
-  .sidebar ul li:hover {
-    background-color: #c0c0c0;
-}
-
-  .sidebar button {
-    background-color: #8a6de9;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
-
-  .sidebar button:hover {
-    background-color: #7a5dd9;
-    cursor: pointer;
-}
-
-  .navBut {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    align-items: center;
-  }
-
-  .navBut {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    align-items: center;
-  }
-  .navButtons button {
-    background-color: #d1c4e9;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .navBut .navButtons{
-    display: flex;
-    gap: 10px;
-  }
-
-  .navButtons :hover{
-    background-color: #c0b4d9;
-  }
-
-  .navBut .help {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
-    cursor: pointer;
+}
+.sidebar a {
+    display: block;
+    padding: 10px 0;
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+}
+.sidebar a i {
+    margin-right: 10px;
+}
+.sidebar a:focus, .sidebar a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
+.content h2 {
+    font-weight: 500;
+}
+.courseCard {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.courseCard img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.courseCard .courseInfo {
+    flex: 1;
+}
+.courseCard .courseInfo h3 {
+    margin: 0;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+}
+.courseCard .courseInfo p {
+    margin: 5px 0 0;
+    color: palevioletred;
+}
+.courseCard .courseInfo a {
+    text-decoration: none;
+}
+.courseCard a {
+    text-decoration: none;
 }
 
 footer {

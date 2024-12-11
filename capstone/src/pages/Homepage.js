@@ -1,13 +1,16 @@
 // src/components/HomePage.js
-import React from 'react';
+import React, { useState } from 'react';
 import styles from'./Homepage.module.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function HomePage() {
-    const navigate = useNavigate();
+  const user = useSelector((state)=> state.auth.login.currentUser)
+  const navigate = useNavigate();
   const handleLogoClick = () => {
     navigate('/')
   };
@@ -23,6 +26,12 @@ function HomePage() {
   const handleLearnClick = () => {
     navigate('/learn');
   }
+  const handleLearningPath = () => {
+    navigate('/learnpath');
+  }
+  const handleProfile = () => {
+    navigate('/profile');
+};
 
   return (
     <div>
@@ -39,8 +48,26 @@ function HomePage() {
           </span>
         </div>
         <div className={styles.authButtons}>
-          <button className={styles.loginBtn} onClick={handleLoginClick}>Login</button>
-          <button className={styles.signupBtn} onClick={handleSignupClick}>Sign up</button>
+        {user? (
+          <>
+          <p className="navbar-user">
+            <div className={styles.icons}>
+              <a href="#">
+                <FontAwesomeIcon icon={faBell} />
+              </a>
+              <a href="#" onClick={handleProfile}>
+                <FontAwesomeIcon icon={faUserCircle} />
+              </a>
+              <span> {user.username}  </span>
+            </div> </p>
+          <Link to="/logout" className="navbar-logout"> Log out</Link>
+          </>
+        ) : (    
+          <>
+          <Link to="/login" className={styles.loginBtn}> Login </Link>
+          <Link to="/register" className={styles.signupBtn}> Register</Link>
+        </>
+        )}
         </div>
       </header>
 
@@ -48,7 +75,7 @@ function HomePage() {
         <ul>
           <li onClick={handleLogoClick}><a href="#">Trang chủ</a></li>
           <li onClick={handleCourseDetailClick}><a href="#">Khóa học</a></li>
-          <li><a href="#">Lộ trình học tập</a></li>
+          <li onClick={handleLearningPath}><a href="#">Lộ trình học tập</a></li>
           <li><a href="#">Chia sẻ kiến thức</a></li>
         </ul>
       </nav>

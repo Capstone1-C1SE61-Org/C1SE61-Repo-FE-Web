@@ -16,8 +16,14 @@ const CourseDetails = () => {
   const handleSignupClick = () => {
     navigate('/register');
   };
-  const handleLearnClick = () => {
+  const handleCourseDescriptionClick = () => {
     navigate('/learn');
+  }
+  const handleCourseDetailClick = () => {
+    navigate('/coursedetail');
+  }
+  const handleLearningPath = () => {
+    navigate('/learnpath');
   }
 
   return (
@@ -43,8 +49,8 @@ const CourseDetails = () => {
       <nav>
         <ul>
           <li onClick={handleLogoClick}><a href="#">Trang chủ</a></li>
-          <li><a href="#">Khóa học</a></li>
-          <li><a href="#">Lộ trình học tập</a></li>
+          <li><a href="#" onClick={handleCourseDetailClick}>Khóa học</a></li>
+          <li><a href="#" onClick={handleLearningPath}>Lộ trình học tập</a></li>
           <li><a href="#">Chia sẻ kiến thức</a></li>
         </ul>
       </nav>
@@ -52,7 +58,7 @@ const CourseDetails = () => {
       <main className={styles.content}>
         <h2>Khóa học của tôi</h2>
         <p>Bạn chưa hoàn thành khóa học nào.</p>
-        <div className={styles.courseCard} onClick={handleLearnClick}>
+        <div className={styles.courseCard} onClick={handleCourseDescriptionClick}>
           <div className={styles.courseImage}>
             <div className={styles.courseTitle} >HTML từ zero đến hero</div>
           </div>
@@ -65,7 +71,7 @@ const CourseDetails = () => {
           </div>
         </div>
 
-        <div className={styles.courseCard} onClick={handleLearnClick}>
+        <div className={styles.courseCard} onClick={handleCourseDescriptionClick}>
         <div className={styles.courseCSS}>
           <div className={styles.courseImage}>
             <div className={styles.courseTitle}>CSS từ zero đến hero</div>
@@ -80,7 +86,7 @@ const CourseDetails = () => {
           </div>
         </div>
 
-        <div className={styles.courseCard} onClick={handleLearnClick}>
+        <div className={styles.courseCard} onClick={handleCourseDescriptionClick}>
         <div className={styles.courseJavaScript}>
           <div className={styles.courseImage}>
             <div className={styles.courseTitle}>JavaScript từ zero đến hero</div>
