@@ -9,7 +9,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function HomePage() {
+<<<<<<< HEAD
   const user = useSelector((state)=> state.auth.login.currentUser)
+=======
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
   const navigate = useNavigate();
   const handleLogoClick = () => {
     navigate('/')
@@ -29,9 +32,12 @@ function HomePage() {
   const handleLearningPath = () => {
     navigate('/learnpath');
   }
+<<<<<<< HEAD
   const handleProfile = () => {
     navigate('/profile');
 };
+=======
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
 
   return (
     <div>

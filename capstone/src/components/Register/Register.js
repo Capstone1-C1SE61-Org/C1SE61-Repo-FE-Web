@@ -31,6 +31,7 @@ function SignUpForm() {
   const handleVerifyClick = () => {
     navigate('/verify');
   };
+<<<<<<< HEAD
   const handleRegister = (e) => {
     e.preventDefault();
     const newUser = {
@@ -48,6 +49,8 @@ function SignUpForm() {
     };
     registerUser (newUser, dispatch, navigate);
 };
+=======
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
   return (
     <div className={styles.container}>
       <div className={styles.signupBox}>
@@ -101,8 +104,12 @@ function SignUpForm() {
             required />
             <span className={styles.icon}><FontAwesomeIcon icon={faPhone} /></span>
           </div>
+<<<<<<< HEAD
           <button type="submit" className={styles.btn}>Sign up</button>
           </form>
+=======
+          <button type="submit" className={styles.btn} onClick={handleVerifyClick}>Sign up</button>
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
           <div className={styles.loginLink}>
             <p>Bạn đã có tài khoản, <a href="#" onClick={handleLoginClick}>Đăng Nhập</a>.</p>
           </div>

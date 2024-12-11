@@ -7,8 +7,24 @@ import { useNavigate } from 'react-router-dom';
 import { faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle, faPencilAlt  } from '@fortawesome/free-solid-svg-icons';
 
 function Profile() {
+<<<<<<< HEAD
     const [profile, setProfile] = useState("");
     const [isEditing, setIsEditing] = useState("");
+=======
+    const [profile, setProfile] = useState({
+      name: "Huỳnh Văn Tâm",
+      email: "hvantam11@gmail.com",
+      phone: "0898429487",
+      birthday: "6 tháng 12, 2003",
+    });
+  
+    const [isEditing, setIsEditing] = useState({
+      name: false,
+      email: false,
+      phone: false,
+      birthday: false,
+    });
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
   
     const handleEditToggle = (field) => {
       setIsEditing((prev) => ({
@@ -37,10 +53,14 @@ function Profile() {
     };
     const handleLearningPath = () => {
       navigate('/learnpath');
+<<<<<<< HEAD
     } ;
     const handleRegisteredCourses = () => {
       navigate('/registeredcourse');
     };
+=======
+    }  
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
   
     return (
         <div>
@@ -68,7 +88,11 @@ function Profile() {
             <nav>
             <ul>
               <li><a href="#" onClick={handleLogoClick}>Trang chủ</a></li>
+<<<<<<< HEAD
               <li><a href="#" onClick={handleCourseDetailClick}>Khóa học</a></li>
+=======
+              <li onClick={handleCourseDetailClick}><a href="#">Khóa học</a></li>
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
               <li><a href="#" onClick={handleLearningPath}>Lộ trình học tập</a></li>
               <li><a href="#">Chia sẻ kiến thức</a></li>
             </ul>
@@ -84,13 +108,21 @@ function Profile() {
             <FontAwesomeIcon icon={faLock} />
             Privacy and security
           </a>
+<<<<<<< HEAD
           <a href="#" onClick={handleRegisteredCourses}>
+=======
+          <a href="#">
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
             <FontAwesomeIcon icon={faBook} />
             Registered courses
           </a>
           <a href="#">
             <FontAwesomeIcon icon={faShareAlt} />
+<<<<<<< HEAD
             Share knowledge
+=======
+            Share statistics
+>>>>>>> 3592c6ab27cdec571e58ea07c2c8d127cb5fabef
           </a>
           <a href="#">
             <FontAwesomeIcon icon={faLanguage} />
