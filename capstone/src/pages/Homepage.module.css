@@ -129,14 +129,14 @@ section {
 }
 
 .JavaScriptSection {
-    background-color: pink;
+    background-color: rgb(255, 244, 163);
     height: 400px;
     padding: 20px;
     position: relative;
 }
 
 .JavaSection {
-    background-color: green;
+    background-color: rgb(150, 212, 212);
     height: 400px;
     padding: 20px;
     position: relative;

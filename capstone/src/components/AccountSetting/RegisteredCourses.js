@@ -1,59 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Profile.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faMagnifyingGlass, faUser, faPencil, faBell, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle, faPencilAlt  } from '@fortawesome/free-solid-svg-icons';
+import { faUser} from '@fortawesome/free-solid-svg-icons';
+import { faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 function RegisteredCourses() {
 
     const navigate = useNavigate();
-    const handleLogoClick = () => {
-        navigate('/')
-        
-    };
-    const handleCourseDetailClick = () => {
-        navigate('/coursedetail');
-    };
     const handleProfile = () => {
         navigate('/profile');
     };
-    const handleLearningPath = () => {
-      navigate('/learnpath');
-    }
-
     return (
         <div>
-            <header>
-                <div className={styles.logo} onClick={handleLogoClick}>
-                <img src={require('../../images/logo.png')} alt="Logo" className={styles.logoImg} />
-                </div>
-                <div className={styles.searchBar}>
-                <input type="text" placeholder="Search..." />
-                <span className={styles.searchIcon}>
-                <a href="#">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </a>
-                </span>
-                </div>
-                <div className={styles.icons}>
-                    <a href="#">
-                        <FontAwesomeIcon icon={faBell} />
-                    </a>
-                    <a href="#">
-                        <FontAwesomeIcon icon={faUserCircle} />
-                    </a>
-                </div>
-            </header>
-            <nav>
-            <ul>
-              <li><a href="#" onClick={handleLogoClick}>Trang chủ</a></li>
-              <li><a href="#" onClick={handleCourseDetailClick}>Khóa học</a></li>
-              <li><a href="#" onClick={handleLearningPath}>Lộ trình học tập</a></li>
-              <li><a href="#">Chia sẻ kiến thức</a></li>
-            </ul>
-            </nav>
+            <Header/>
 
             <div className={styles.profilePage}>
                 <div className={styles.sidebar}>
@@ -138,30 +100,7 @@ function RegisteredCourses() {
                     </div>
                 </div>
             </div>
-
-
-            <footer>
-            <div className={styles.footerContent}>
-                <div className={styles.footerLinks}>
-                    <a href="#">Khóa học thịnh hành</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Thành viên</a>
-                    <a href="#">Mục xem nhiều</a>
-                </div>
-                <div className={styles.footerAbout}>
-                    <p>Về chúng tôi</p>
-                    <p>C1SE.61-CapStone là nơi giúp các bạn học tập, bổ sung kiến thức và cải thiện kĩ năng lập trình cho người mới bắt đầu. Cập nhật liên tục, chính xác và đầy đủ.</p>
-                    <p>Liên hệ chúng tôi: <a href="mailto:P3L@gmail.com" className={styles.email}>P3L@gmail.com</a></p>
-                </div>
-                <div className={styles.footerFollow}>
-                    <p>Theo dõi chúng tôi</p>
-                    <a href="#" aria-label="Facebook"><FontAwesomeIcon icon={faFacebook} /></a>
-                    <a href="#" aria-label="Google"><FontAwesomeIcon icon={faGoogle} /></a>
-                    <a href="#" aria-label="GitHub"><FontAwesomeIcon icon={faGithub} /></a>
-                </div>
-                </div>
-                    <p className={styles.copyright}>© Copyright 2025 P3L. All rights reserved</p>
-            </footer>
+            <Footer/>
         </div>
     );
 }
