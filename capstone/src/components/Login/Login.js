@@ -22,6 +22,11 @@ function Login() {
       };
     const handleLogin = (e) => {
         e.preventDefault();
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Mật khẩu ít nhất 8 ký tự, gồm chữ cái và số
+        if (!passwordRegex.test(password)) {
+            alert("Mật khẩu không hợp lệ. Phải có ít nhất 8 ký tự, bao gồm chữ cái và số, không được chứa ký tự đặc biệt.");
+            return;
+          }
         const newUser = {
             username: username,
             password: password,
@@ -39,6 +44,7 @@ function Login() {
                             type="text" 
                             placeholder="Username" 
                             onChange={(e) => setUsername(e.target.value)} 
+                            required
                         />
                         <span className={styles.icon}><FontAwesomeIcon icon={faUser} /></span>
                     </div>
@@ -47,6 +53,7 @@ function Login() {
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
                         <span className={styles.icon}><FontAwesomeIcon icon={faLock} /></span>
                         <span className={styles.togglePassword} onClick={togglePasswordVisibility}>

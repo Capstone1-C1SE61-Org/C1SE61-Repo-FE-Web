@@ -49,12 +49,12 @@ const Header = () => {
                 <span> {user.username} </span>
               </div>
             </p>
-            <Link to="/logout" className="navbar-logout"> Log out</Link>
+            <Link to="/logout" className="navbar-logout"> Đăng xuất</Link>
           </>
         ) : (
           <>
-            <Link to="/login" className={styles.loginBtn}> Login </Link>
-            <Link to="/register" className={styles.signupBtn}> Register</Link>
+            <Link to="/login" className={styles.loginBtn}> Đăng Nhập </Link>
+            <Link to="/register" className={styles.signupBtn}> Đăng Ký</Link>
           </>
         )}
       </div>
