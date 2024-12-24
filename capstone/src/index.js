@@ -6,9 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './AuthContext';
 import { BrowserRouter } from 'react-router-dom';
 import { ParallaxProvider } from "react-scroll-parallax";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
   <BrowserRouter>
     <AuthProvider>
       <ParallaxProvider>
@@ -16,4 +19,5 @@ root.render(
       </ParallaxProvider>
     </AuthProvider>
   </BrowserRouter>
+  </Provider>,
 );

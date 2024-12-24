@@ -4,9 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faGoogle, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/apiRequest';
 
 function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -16,20 +20,39 @@ function Login() {
     const handleSignupClick = () => {
         navigate('/register');
       };
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Mật khẩu ít nhất 8 ký tự, gồm chữ cái và số
+        if (!passwordRegex.test(password)) {
+            alert("Mật khẩu không hợp lệ. Phải có ít nhất 8 ký tự, bao gồm chữ cái và số, không được chứa ký tự đặc biệt.");
+            return;
+          }
+        const newUser = {
+            username: username,
+            password: password,
+        };
+        loginUser(newUser,dispatch,navigate);
+    };
 
     return (
         <div className={styles.container}>
             <div className={styles.loginBox}>
                 <h2>Login</h2>
-                <form action="#">
+                    <form onSubmit={handleLogin}>
                     <div className={styles.inputField}>
-                        <input type="text" placeholder="Username" required />
+                        <input 
+                            type="text" 
+                            placeholder="Username" 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required
+                        />
                         <span className={styles.icon}><FontAwesomeIcon icon={faUser} /></span>
                     </div>
                     <div className={styles.inputField}>
                         <input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Enter your password"
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                         <span className={styles.icon}><FontAwesomeIcon icon={faLock} /></span>
@@ -38,6 +61,7 @@ function Login() {
                         </span>
                     </div>
                     <button type="submit" className={styles.btn}>Login</button>
+                    </form>
                     <a href="#" className={styles.forgot}>Forgot password?</a>
                     <div className={styles.socialLogin}>
                         <p>Another app</p>
@@ -54,7 +78,6 @@ function Login() {
                             Đồng các điều khoản bởi <a href="#">P3L</a>
                         </label>
                     </div>
-                </form>
             </div>
         </div>
         
