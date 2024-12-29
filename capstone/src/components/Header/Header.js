@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../AuthContext'
+import { request } from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +9,11 @@ import { faMagnifyingGlass, faBell, faUserCircle } from '@fortawesome/free-solid
 import styles from './Header.module.css';
 
 const Header = () => {
-    const user = useSelector((state)=> state.auth.login.currentUser)
+    const token = localStorage.getItem('token'); // Lấy token từ Local Storage
+    const [searchQuery, setSearchQuery] = useState('');
+    // const user = useSelector((state)=> state.auth.login.currentUser)
     const navigate = useNavigate();
+
     const handleLogoClick = () => {
         navigate('/')
     };
@@ -21,6 +26,39 @@ const Header = () => {
     const handleProfile = () => {
         navigate('/profile');
     };
+    const handleLogout = () => {
+      // Xóa token khỏi Local Storage khi đăng xuất
+      localStorage.removeItem('token');
+      navigate('/');
+  };
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?query=${searchQuery}`);
+    }
+  };
+
+  // GET USER INFO
+  const { user } = useAuth();
+  const [userData, setUserData] = useState([]);
+  useEffect(() => {
+      const fetchUserData = async () => {
+          try {
+              const res = await request.get('/customer/detail')
+              setUserData(res)
+          } catch (error) {
+              console.log("Error fetching user information", error);
+          }
+      }
+
+      if (user) {
+          fetchUserData();
+      }
+  }, [user])
   return (
     <div>
     <header>
@@ -28,15 +66,22 @@ const Header = () => {
         <img src={require('../../images/logo.png')} alt="Logo" className={styles.logoImg} />
       </div>
       <div className={styles.searchBar}>
-        <input type="text" placeholder="Search..." />
-        <span className={styles.searchIcon}>
-          <a href="#">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </a>
-        </span>
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <span className={styles.searchIcon}>
+            <button type="submit">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </span>
+        </form>
       </div>
       <div className={styles.authButtons}>
-        {user ? (
+        {token ? (
           <>
             <p className="navbar-user">
               <div className={styles.icons}>
@@ -44,12 +89,19 @@ const Header = () => {
                   <FontAwesomeIcon icon={faBell} />
                 </a>
                 <a href="#" onClick={handleProfile}>
-                  <FontAwesomeIcon icon={faUserCircle} />
-                </a>
-                <span> {user.username} </span>
+                    <img
+                  component="img"
+                  src={ userData.customerImg || ''}
+                  alt="avatar"
+                  height="30"
+                  width="30"
+                  style={{ borderRadius: '50%', objectFit: 'cover' }}
+                />
+                  </a>
+                  <span> {userData.username} </span>
               </div>
             </p>
-            <Link to="/logout" className="navbar-logout"> Đăng xuất</Link>
+            <Link to="/" className={styles.navbarLogout} onClick={handleLogout}> Đăng xuất</Link>
           </>
         ) : (
           <>
