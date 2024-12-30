@@ -1,73 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Profile.module.css';
-import axios from "axios";
+import { useAuth } from '../../AuthContext'
+import { request } from '../../utils/axiosInstance';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faPencilAlt, faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faPencilAlt, faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle, faCamera } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
 
 function Profile() {
   const navigate = useNavigate();
-
-  const [profile, setProfile] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    birthday: "",
-  });
-  const [isEditing, setIsEditing] = useState({
-    name: false,
-    email: false,
-    phone: false,
-    birthday: false,
-  });
-  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/user/profile")
-      .then((response) => {
-        setProfile(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching profile data:", error);
-        setLoading(false);
-      });
-  }, []);
+    const fetchUserData = async () => {
+        try {
+            const res = await request.get('/customer/detail')
+            setUserData(res)
+        } catch (error) {
+            console.log("Error fetching user information", error);
+        }
+    }
 
-  const handleInputChange = (field, value) => {
-    setProfile((prevProfile) => ({
-      ...prevProfile,
-      [field]: value,
-    }));
-  };
-
-  const handleEditToggle = (field) => {
-    setIsEditing((prevEditing) => ({
-      ...prevEditing,
-      [field]: !prevEditing[field],
-    }));
-  };
-
-  const handleSave = (field) => {
-    axios
-      .put(`http://localhost:8080/api/v1/public/customer${field}`, { [field]: profile[field] })
-      .then(() => {
-        setIsEditing((prevEditing) => ({
-          ...prevEditing,
-          [field]: false,
-        }));
-      })
-      .catch((error) => {
-        console.error("Error updating profile:", error);
-      });
-  };
-
-  if (loading) {
-    return <p>Đang tải thông tin...</p>;
-  }
+    if (user) {
+        fetchUserData();
+    }
+}, [user])
 
   const handleNavigate = (path) => {
     navigate(path);
@@ -78,79 +38,42 @@ function Profile() {
       <Header/>
 
       <div className={styles.profilePage}>
-        <div className={styles.sidebar}>
-          <a href="#" style={{ textDecoration: 'underline' }}>
-            <FontAwesomeIcon icon={faUser} />
-            Profile
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faLock} />
-            Privacy and security
-          </a>
-          <a href="#" onClick={() => handleNavigate('/registeredcourse')}>
-            <FontAwesomeIcon icon={faBook} />
-            Registered courses
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faShareAlt} />
-            Share knowledge
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faLanguage} />
-            Language
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faFileAlt} />
-            Terms &amp; Policies
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faInfoCircle} />
-            About
-          </a>
-        </div>
-
+        <ProfileSidebar/>
         <div className={styles.content}>
           <div className={styles.profileHeader}>
+            <div className={styles.changeAvatar}>
             <img
-              src={require("../../images/avatar.jpg")}
-              alt="Profile Picture"
-              className={styles.logoImg}
+              component="img"
+              src={ userData.customerImg || ''}
+              alt="avatar"
               height="100"
               width="100"
             />
-            <h2>{profile.name}</h2>
+            <button><FontAwesomeIcon icon={faCamera} /> </button>
+            </div>
+            <h2>{userData.customerName}</h2>
           </div>
 
           <div className={styles.profileInfo}>
-            <h3>Thông tin cá nhân</h3>
-
-            {["name", "email", "phone", "birthday"].map((field) => (
-              <div className={styles.infoItem} key={field}>
-                <label>
-                  {field === "name"
-                    ? "Tên người dùng:"
-                    : field === "email"
-                    ? "Email:"
-                    : field === "phone"
-                    ? "Số điện thoại:"
-                    : "Ngày sinh:"}
-                </label>
-                {isEditing[field] ? (
-                  <input
-                    type={field === "email" ? "email" : "text"}
-                    value={profile[field]}
-                    onChange={(e) => handleInputChange(field, e.target.value)}
-                    onBlur={() => handleSave(field)} // Lưu khi người dùng thoát khỏi ô input
-                  />
-                ) : (
-                  <span>{profile[field]}</span>
-                )}
-                <FontAwesomeIcon
-                  icon={faPencilAlt}
-                  onClick={() => handleEditToggle(field)}
-                />
+            <h2 style={{ textAlign: 'center' }}>Thông tin cá nhân</h2>
+              <div className={styles.infoBox}>
+                <div variant="h5" component="div" className={styles.customer_name}>
+                <h2 className={styles.info_title_tag}>Tên người dùng</h2>
+                  {userData.customerName || ''}
+                </div>
               </div>
-            ))}
+              <div className={styles.infoBox}>
+                <div component="div" variant="body2">
+                  <h2 className={styles.info_title_tag}>Email</h2>
+                  <h1 className={styles.info_title_item}>{userData.accountEmail || ''}</h1>
+                </div>
+              </div>
+              <div className={styles.infoBox}>
+              <div component="div" variant="body2">
+                <h2 className={styles.info_title_tag}>Số điện thoại</h2>
+                <h1 className={styles.info_title_item}>{userData.customerPhone || ''}</h1>
+              </div>
+              </div>
           </div>
         </div>
       </div>
