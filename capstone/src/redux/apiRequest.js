@@ -12,6 +12,18 @@ export const loginUser = async(user, dispatch, navigate) => {
     }
 };
 
+// export const registerUser = async (user, dispatch, navigate) => {
+//     dispatch(registerStart());
+//     try{
+//         await axios.post ("http://localhost:8080/api/v1/public/signup", user);
+//         dispatch(registerSuccess());
+//         navigate("/login");
+
+//     } catch (err) {
+//         dispatch(registerFailed());
+//     }
+// }
+
 export const registerUser = async (user, dispatch, navigate) => {
     dispatch(registerStart());
     try{
@@ -20,6 +32,7 @@ export const registerUser = async (user, dispatch, navigate) => {
         navigate("/login");
 
     } catch (err) {
+        console.error("Error during registration: ", err.respsonse ? err.response.data : err.message);
         dispatch(registerFailed());
     }
 }

@@ -8,11 +8,25 @@ import Footer from '../Footer/Footer';
 
 function CourseDescription() {
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         try {
+    //             const res = await request.get('/customer/detail')
+    //             setUserData(res)
+    //         } catch (error) {
+    //             console.log("Error fetching user information", error);
+    //         }
+    //     }
+    
+    //     if (user) {
+    //         fetchUserData();
+    //     }
+    // }, [user])
     return (
         
         <div>
             <Header/>
-            {/* Main Content and Sidebar */}
             <div className={styles.Container}>
                 <div className={styles.mainContent}>
                 <div className={styles.lessonHeader}>HTML cơ bản</div>
@@ -33,8 +47,6 @@ function CourseDescription() {
                     </a>
                 </div>
                 </div>
-
-                {/* Sidebar */}
                 <div className={styles.sidebar}>
                 <h3>Nội dung bài học: 0/100</h3>
                 <ul>

@@ -6,20 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faEye, faEyeSlash, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { registerUser } from '../../redux/apiRequest';
 
-function SignUpForm() {
-
+function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
-  const [code, setCode] = useState("");
-  const [gender, setGender] = useState("");
-  const [dateofBirth, setDateofBirth] = useState("");
-  const [address, setAddress] = useState("");
-  const [idCard, setIdCard] = useState("");
-  const [userType, setUserType] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,9 +20,6 @@ function SignUpForm() {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const handleLoginClick = () => {
     navigate('/login');
-  };
-  const handleVerifyClick = () => {
-    navigate('/verify');
   };
   const handleRegister = (e) => {
     e.preventDefault();
@@ -67,12 +57,6 @@ function SignUpForm() {
       password: password,
       phone: phone,
       name: name,
-      code: code,
-      gender: gender,
-      dateofBirth: dateofBirth,
-      address: address,
-      idCard: idCard,
-      userType: userType,
     };
     registerUser (newUser, dispatch, navigate);
 };
@@ -81,6 +65,14 @@ function SignUpForm() {
       <div className={styles.signupBox}>
         <h2>Đăng Ký</h2>
           <form onSubmit={handleRegister}>
+          <div className={styles.inputField}>
+            <input 
+            type="text" 
+            placeholder="Full Name" 
+            onChange={(e)=>setName(e.target.value)}
+            required />
+            <span className={styles.icon}><FontAwesomeIcon icon={faUser} /></span>
+          </div>
           <div className={styles.inputField}>
             <input 
             type="text" 
@@ -143,4 +135,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default Register;

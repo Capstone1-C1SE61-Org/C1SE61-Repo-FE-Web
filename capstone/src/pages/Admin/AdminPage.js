@@ -23,6 +23,9 @@ function AdminPage() {
   const handleAdminPage = () => {
     navigate('/admin');
   };
+  const handleManageInstructor = () => {
+    navigate('/manageinstructor');
+  }
 
   return (
     <div className={styles.dashboard}>
@@ -36,16 +39,13 @@ function AdminPage() {
         </a>
         <div className={`${styles.submenu} ${isSubmenuVisible ? styles.visible : ""}`}>
           <a href="#" onClick={handleManageUser}>User account</a>
-          <a href="#">Instructor account</a>
+          <a href="#" onClick={handleManageInstructor}>Instructor account</a>
         </div>
         <a href="#">
           <FontAwesomeIcon icon={faBook} /> Manage course
         </a>
         <a href="#">
           <FontAwesomeIcon icon={faComments} /> Manage feedback
-        </a>
-        <a href="#">
-          <FontAwesomeIcon icon={faUsersCog} /> Manage community
         </a>
         <a href="#">
           <FontAwesomeIcon icon={faLifeRing} /> Support
@@ -62,6 +62,8 @@ function AdminPage() {
               alt="Logo"
               height="100"
               width="100"
+              style={{ cursor: "pointer"}}
+              onClick={handleAdminPage}
             />
             <span>
               P3L<br />Admin
@@ -101,29 +103,29 @@ function AdminPage() {
               <tr>
                 <th>Name</th>
                 <th>Contact</th>
-                <th>Country</th>
+                <th>Phone</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Nguyễn Duy Hùng</td>
+                <td>Võ Duy Hùng</td>
                 <td>hvo190403@gmail.com</td>
-                <td>VIETNAM</td>
+                <td>0392930729</td>
               </tr>
               <tr>
                 <td>Huỳnh Văn Tâm</td>
                 <td>hvantam0612@gmail.com</td>
-                <td>VIETNAM</td>
+                <td>0898429487</td>
               </tr>
               <tr>
                 <td>Nguyễn Duy Trí</td>
                 <td>duytri02@gmail.com</td>
-                <td>VIETNAM</td>
+                <td>0326683799</td>
               </tr>
               <tr>
                 <td>Trương Tất Trung</td>
                 <td>trungacelessi@gmail.com</td>
-                <td>VIETNAM</td>
+                <td>0967542309</td>
               </tr>
             </tbody>
           </table>
