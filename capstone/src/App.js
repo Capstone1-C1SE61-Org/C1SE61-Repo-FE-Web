@@ -14,6 +14,9 @@ import Introduction from './components/FootLink/Introduction';
 import AdminPage from './pages/Admin/AdminPage'
 import ManageUserAccount from './pages/Admin/ManageUserAccount';
 import ManageInstructorAccount from './pages/Admin/ManageInstructorAccount';
+import CourseDetail from './components/CourseDetail/CourseDetail';
+import AdminManageCourse from './pages/Admin/AdminManageCourse';
+import InstructorPage from './pages/Instructor/InstructorPage';
 
 
 function App() {
@@ -23,7 +26,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/course" element={<Course/>}/>
-      <Route path="/learn" element={<CourseDescription/>}/>
+      <Route path="/learn/:courseId" element={<CourseDescription />} />
       <Route path="/verify" element={<VerifyCode/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/learnpath" element={<LearningPath/>}/>
@@ -32,6 +35,9 @@ function App() {
       <Route path="/admin" element={<AdminPage/>}/>
       <Route path="/manageuser" element={<ManageUserAccount/>}/>
       <Route path="/manageinstructor" element={<ManageInstructorAccount/>}/>
+      <Route path="/course/:id" element={<CourseDetail />} />
+      <Route path="/adminmanagecourse" element={<AdminManageCourse/>}/>
+      <Route path="/instructor" element={<InstructorPage/>}/>
     </Routes>
     
   );

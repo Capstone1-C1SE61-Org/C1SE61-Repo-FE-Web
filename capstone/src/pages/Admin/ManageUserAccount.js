@@ -38,6 +38,9 @@ function ManageUserAccount() {
   const handleManageInstructor = () => {
     navigate('/manageinstructor');
   }
+  const handleAdminManageCourse = () => {
+    navigate('/adminmanagecourse');
+  }
 
   const users = [
     {
@@ -70,7 +73,7 @@ function ManageUserAccount() {
           <a href="#" onClick={handleManageUser}>User account</a>
           <a href="#" onClick={handleManageInstructor}>Instructor account</a>
         </div>
-        <a href="#">
+        <a href="#" onClick={handleAdminManageCourse}>
           <FontAwesomeIcon icon={faBook} /> Manage course
         </a>
         <a href="#">

@@ -40,6 +40,7 @@ function Login() {
                 const token = response.data.token;
                 localStorage.setItem('token', token);
                 setUser(token);
+                console.log('Đăng nhập thành công', token);
                 if (response.data.roles == 'ROLE_ADMIN') {
                     navigate('/admin')
                 } else {

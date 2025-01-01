@@ -55,12 +55,12 @@ const Course = () => {
           <br />
           Ngày cập nhật: {new Date(course.updateDate).toLocaleDateString()}
         </p>
-        {/* <button
+        <button
           className={styles.enrollButton}
           onClick={() => navigate(`/course/${course.courseId}`)}
         >
           Chi tiết khóa học
-        </button> */}
+        </button>
       </div>
     </div>
   );

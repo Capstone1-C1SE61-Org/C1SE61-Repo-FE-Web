@@ -37,7 +37,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: 200px;
-  cursor: pointer;
   width: auto;
 }
 
@@ -91,4 +90,16 @@ body {
 
 .icon {
   margin-right: 5px;
+}
+.enrollButton {
+  background-color:#634a9e;
+  color:white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.enrollButton:hover {
+  background-color: #341d6b;
 }

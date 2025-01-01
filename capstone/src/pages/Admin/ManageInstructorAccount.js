@@ -44,26 +44,32 @@ function ManageInstructorAccount() {
     closeCreateModal();
   };
 
-  const [isSidebarHidden, setSidebarHidden] = useState(false);
-  const [isSubmenuVisible, setSubmenuVisible] = useState(false);
-  const navigate = useNavigate();
+    const [isSidebarHidden, setSidebarHidden] = useState(false);
+    const [isSubmenuVisible, setSubmenuVisible] = useState(false);
+    const navigate = useNavigate();
 
-  const toggleSidebar = () => {
-    setSidebarHidden(!isSidebarHidden);
-  };
+    const toggleSidebar = () => {
+      setSidebarHidden(!isSidebarHidden);
+    };
 
-  const toggleSubmenu = (e) => {
-    e.preventDefault();
-    setSubmenuVisible((prev) => !prev);
-  };
+    const toggleSubmenu = (e) => {
+      e.preventDefault();
+      setSubmenuVisible((prev) => !prev);
+    };
 
-  const handleManageUser = () => {
-    navigate('/manageuser');
-  };
+    const handleManageUser = () => {
+      navigate('/manageuser');
+    };
 
-  const handleAdminPage = () => {
-    navigate('/admin');
-  };
+    const handleAdminPage = () => {
+      navigate('/admin');
+    };
+    const handleManageInstructor = () => {
+      navigate('/manageinstructor');
+    }
+    const handleAdminManageCourse = () => {
+      navigate('/adminmanagecourse');
+    }
 
   const users = [
     {
@@ -94,9 +100,9 @@ function ManageInstructorAccount() {
         </a>
         <div className={`${styles.submenu} ${isSubmenuVisible ? styles.visible : ""}`}>
           <a href="#" onClick={handleManageUser}>User account</a>
-          <a href="#">Instructor account</a>
+          <a href="#" onClick={handleManageInstructor}>Instructor account</a>
         </div>
-        <a href="#">
+        <a href="#" onClick={handleAdminManageCourse}>
           <FontAwesomeIcon icon={faBook} /> Manage course
         </a>
         <a href="#">
