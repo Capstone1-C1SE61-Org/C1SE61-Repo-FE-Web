@@ -10,6 +10,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({});
+    const [lesson, setLesson] = useState({});
 
     const navigate = useNavigate();
     const location = useLocation();

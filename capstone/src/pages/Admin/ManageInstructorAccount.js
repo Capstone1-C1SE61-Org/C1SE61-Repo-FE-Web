@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import styles from './ManageUserAccount.module.css'; 
+import styles from './ManageInstructorAccount.module.css'; 
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTachometerAlt, faUsers, faBook, faComments, faUsersCog, faLifeRing, faBars, faEye, faTrash, faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-function ManageUserAccount() {
+function ManageInstructorAccount() {
   const [modalData, setModalData] = useState(null);
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    password: "",
+    email: "",
+    phone: "",
+  });
 
   const openModal = (name, username, phone, email, avatar) => {
     setModalData({ name, username, phone, email, avatar });
@@ -15,32 +23,53 @@ function ManageUserAccount() {
     setModalData(null);
   };
 
-  const [isSidebarHidden, setSidebarHidden] = useState(false);
-  const [isSubmenuVisible, setSubmenuVisible] = useState(false);
-  const navigate = useNavigate();
-
-  const toggleSidebar = () => {
-    setSidebarHidden(!isSidebarHidden);
+  const openCreateModal = (name, username , password, phone, email) => {
+    setCreateModalOpen({ name, username , password, phone, email });
   };
 
-  const toggleSubmenu = (e) => {
+  const closeCreateModal = () => {
+    setCreateModalOpen(false);
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmenuVisible((prev) => !prev);
+    console.log("Form Data Submitted:", formData);
+    // Add logic to handle form submission (e.g., API call)
+    closeCreateModal();
   };
 
-  const handleManageUser = () => {
-    navigate('/manageuser');
-  };
+    const [isSidebarHidden, setSidebarHidden] = useState(false);
+    const [isSubmenuVisible, setSubmenuVisible] = useState(false);
+    const navigate = useNavigate();
 
-  const handleAdminPage = () => {
-    navigate('/admin');
-  };
-  const handleManageInstructor = () => {
-    navigate('/manageinstructor');
-  }
-  const handleAdminManageCourse = () => {
-    navigate('/adminmanagecourse');
-  }
+    const toggleSidebar = () => {
+      setSidebarHidden(!isSidebarHidden);
+    };
+
+    const toggleSubmenu = (e) => {
+      e.preventDefault();
+      setSubmenuVisible((prev) => !prev);
+    };
+
+    const handleManageUser = () => {
+      navigate('/manageuser');
+    };
+
+    const handleAdminPage = () => {
+      navigate('/admin');
+    };
+    const handleManageInstructor = () => {
+      navigate('/manageinstructor');
+    }
+    const handleAdminManageCourse = () => {
+      navigate('/adminmanagecourse');
+    }
 
   const users = [
     {
@@ -105,9 +134,12 @@ function ManageUserAccount() {
         </div>
 
         <div className={styles.content}>
-          <h1>User Account Management</h1>
+          <h1>Instructor Account Management</h1>
           <div className={styles.filters}>
             <input type="text" placeholder="Search..." />
+            <button className={styles.btn} onClick={openCreateModal}>
+              Create
+            </button>
           </div>
           <div className={styles.tableContainer}>
             <table>
@@ -192,9 +224,96 @@ function ManageUserAccount() {
             </div>
           </div>
         )}
+
+        {isCreateModalOpen && (
+          <div className={styles.modal} onClick={closeCreateModal}>
+            <div
+              className={styles.modalContent}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.modalHeader}>
+                <h2>Create New Account</h2>
+                <span className={styles.close} onClick={closeCreateModal}>
+                  &times;
+                </span>
+              </div>
+              <div className={styles.modalBody}>
+                {/* Nội dung tạo mới tài khoản */}
+                <div className={styles.formGroup}>
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="phone">Phone:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <button type="submit" className={styles.btnSubmit}>
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className={styles.btnCancel}
+                  onClick={closeCreateModal}
+                  style={{ marginLeft: "190px" }}
+                >
+                  Cancel
+                </button>
+              </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default ManageUserAccount;
+export default ManageInstructorAccount;

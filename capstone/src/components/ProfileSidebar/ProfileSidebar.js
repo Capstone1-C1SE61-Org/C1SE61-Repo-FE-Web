@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ProfileSidebar.module.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLock, faBook, faShareAlt, faLanguage, faFileAlt, faInfoCircle, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 function ProfileSidebar() {
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ function ProfileSidebar() {
       </a>
       <a href="#">
         <FontAwesomeIcon icon={faShareAlt} />
-        Share knowledge
+        Blog posts
       </a>
       <a href="#">
         <FontAwesomeIcon icon={faLanguage} />
@@ -38,6 +38,10 @@ function ProfileSidebar() {
       <a href="#">
         <FontAwesomeIcon icon={faFileAlt} />
         Terms &amp; Policies
+      </a>
+      <a href="#">
+        <FontAwesomeIcon icon={faQuestion} />
+        Support
       </a>
       <a href="#">
         <FontAwesomeIcon icon={faInfoCircle} />

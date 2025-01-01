@@ -11,6 +11,9 @@ function HomePage() {
   const handleLearnClick = () => {
     navigate('/learn');
   }
+  const handleInstructor = () => {
+    navigate('/instructor');
+  }
   return (
     <div>
       <Header/>
@@ -34,7 +37,7 @@ function HomePage() {
             &lt;/body&gt;<br/>
             &lt;/html&gt;<br/>
           </pre>
-          <button className={styles.tryBtn}>Try it Yourself</button>
+          <button className={styles.tryBtn} onClick={handleInstructor}>Try it Yourself</button>
         </div>
       </section>
 

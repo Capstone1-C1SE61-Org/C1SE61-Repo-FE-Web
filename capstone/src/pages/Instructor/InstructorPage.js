@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styles from "./AdminPage.module.css";
+import styles from "./InstructorPage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTachometerAlt, faUsers, faBook, faComments, faUsersCog, faLifeRing, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function AdminPage() {
+function InstructorPage() {
   const [isSidebarHidden, setSidebarHidden] = useState(false);
   const [isSubmenuVisible, setSubmenuVisible] = useState(false);
   const [totalCourses, setTotalCourses] = useState(0);
@@ -51,7 +51,7 @@ function AdminPage() {
       <div className={`${styles.sidebar} ${isSidebarHidden ? styles.hidden : ""}`}>
         <h1 style={{ fontSize: "40px", fontWeight: "bold" }}>P3L</h1>
         <a href="#" onClick={handleAdminPage}>
-          <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt} /> Profile
         </a>
         <a href="#" onClick={toggleSubmenu}>
           <FontAwesomeIcon icon={faUsers} /> Manage account
@@ -85,7 +85,7 @@ function AdminPage() {
               onClick={handleAdminPage}
             />
             <span>
-              P3L<br />Admin
+              P3L<br />Instructor
             </span>
           </div>
         </div>
@@ -93,7 +93,7 @@ function AdminPage() {
           <div className={styles.card}>
             <div>
               <h3>0</h3>
-              <p>Users</p>
+              <p>Course</p>
             </div>
             <FontAwesomeIcon icon={faUsers} />
           </div>
@@ -154,4 +154,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default InstructorPage;

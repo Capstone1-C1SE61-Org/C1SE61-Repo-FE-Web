@@ -17,8 +17,8 @@ const Header = () => {
     const handleLogoClick = () => {
         navigate('/')
     };
-    const handleCourseDetailClick = () => {
-        navigate('/coursedetail');
+    const handleCourseClick = () => {
+        navigate('/course');
     };
     const handleLearningPath = () => {
         navigate('/learnpath');
@@ -74,9 +74,7 @@ const Header = () => {
             onChange={handleSearchChange}
           />
           <span className={styles.searchIcon}>
-            <button type="submit">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
           </span>
         </form>
       </div>
@@ -98,7 +96,7 @@ const Header = () => {
                   style={{ borderRadius: '50%', objectFit: 'cover' }}
                 />
                   </a>
-                  <span> {userData.username} </span>
+                  <span> {userData.customerName} </span>
               </div>
             </p>
             <Link to="/" className={styles.navbarLogout} onClick={handleLogout}> Đăng xuất</Link>
@@ -115,9 +113,9 @@ const Header = () => {
     <nav>
       <ul>
         <li onClick={handleLogoClick}><a href="#">Trang chủ</a></li>
-        <li onClick={handleCourseDetailClick}><a href="#">Khóa học</a></li>
+        <li onClick={handleCourseClick}><a href="#">Khóa học</a></li>
         <li onClick={handleLearningPath}><a href="#">Lộ trình học tập</a></li>
-        <li><a href="#">Chia sẻ kiến thức</a></li>
+        <li><a href="#">Blog</a></li>
       </ul>
     </nav>
     </div>
