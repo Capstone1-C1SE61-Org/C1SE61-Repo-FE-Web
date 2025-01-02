@@ -51,23 +51,23 @@ function AdminPage() {
       <div className={`${styles.sidebar} ${isSidebarHidden ? styles.hidden : ""}`}>
         <h1 style={{ fontSize: "40px", fontWeight: "bold" }}>P3L</h1>
         <a href="#" onClick={handleAdminPage}>
-          <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt} style={{marginRight:"10px"}} /> Dashboard
         </a>
         <a href="#" onClick={toggleSubmenu}>
-          <FontAwesomeIcon icon={faUsers} /> Manage account
+          <FontAwesomeIcon icon={faUsers} style={{marginRight:"10px"}} /> Manage account
         </a>
         <div className={`${styles.submenu} ${isSubmenuVisible ? styles.visible : ""}`}>
           <a href="#" onClick={handleManageUser}>User account</a>
           <a href="#" onClick={handleManageInstructor}>Instructor account</a>
         </div>
         <a href="#" onClick={handleAdminManageCourse}>
-          <FontAwesomeIcon icon={faBook} /> Manage course
+          <FontAwesomeIcon icon={faBook} style={{marginRight:"10px"}} /> Manage course
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faComments} /> Manage feedback
+          <FontAwesomeIcon icon={faComments} style={{marginRight:"10px"}} /> Manage feedback
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faLifeRing} /> Support
+          <FontAwesomeIcon icon={faLifeRing} style={{marginRight:"10px"}} /> Support
         </a>
       </div>
       <div className={`${styles.mainContent} ${isSidebarHidden ? styles.fullWidth : ""}`}>

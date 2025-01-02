@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './CourseDetail.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
@@ -14,10 +13,6 @@ function CourseDetail() {
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-    const handleLearnClick = () => {
-        navigate(`/learn/${course.id}`);
-    };
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -56,6 +51,16 @@ function CourseDetail() {
     fetchCourseDetails();
   }, [courseId]);
 
+  const handleRegisterClick = () => {
+    if (course && course.coursePrice > 0) {
+      // Show alert for paid course
+      alert('Bạn cần phải mua khóa học này để đăng ký học!');
+    } else {
+      // Navigate to the course's learning page
+      navigate(`/learn/${courseId}`);
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -91,8 +96,7 @@ function CourseDetail() {
             <img src={course.image} alt={course.courseName} />
             <button
               className={styles.Button}
-              // onClick={() => navigate(`/course/${course.courseId}`)}
-              onClick={handleLearnClick}
+              onClick={handleRegisterClick} // Handle registration button click
             >
               Đăng ký học
             </button>

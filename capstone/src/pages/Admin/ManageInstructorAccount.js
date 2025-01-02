@@ -93,7 +93,7 @@ function ManageInstructorAccount() {
       <div className={`${styles.sidebar} ${isSidebarHidden ? styles.hidden : ""}`}>
         <h1 style={{ fontSize: "40px", fontWeight: "bold" }}>P3L</h1>
         <a href="#" onClick={handleAdminPage}>
-          <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt}z /> Dashboard
         </a>
         <a href="#" onClick={toggleSubmenu}>
           <FontAwesomeIcon icon={faUsers} /> Manage account
