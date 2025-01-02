@@ -8,12 +8,11 @@ import Footer from '../../components/Footer/Footer';
 function HomePage() {
   const user = useSelector((state)=> state.auth.login.currentUser)
   const navigate = useNavigate();
-  const handleLearnClick = () => {
-    navigate('/learn');
-  }
-  const handleInstructor = () => {
-    navigate('/instructor');
-  }
+  const handleClick = () => {
+    // Navigate to the CourseDescription page, passing a lessonId (e.g., 1)
+    navigate(`/learn/1`); // Adjust '1' to the correct lessonId you want to pass
+};
+
   return (
     <div>
       <Header/>
@@ -21,7 +20,7 @@ function HomePage() {
         <div className={styles.titleBox}>
         <h1>HTML</h1>
         <p>The language for building web pages</p>
-        <button className={styles.learnBtn} onClick={handleLearnClick}>Learn HTML</button>
+        <button className={styles.learnBtn} onClick={handleClick}>Learn HTML</button>
         </div>
         <div className={styles.codeExample}>
           <h3>HTML Example:</h3>
@@ -37,7 +36,7 @@ function HomePage() {
             &lt;/body&gt;<br/>
             &lt;/html&gt;<br/>
           </pre>
-          <button className={styles.tryBtn} onClick={handleInstructor}>Try it Yourself</button>
+          <button className={styles.tryBtn}>Try it Yourself</button>
         </div>
       </section>
 
@@ -45,7 +44,7 @@ function HomePage() {
         <div className={styles.titleBox}>
         <h1>CSS</h1>
         <p>The language for styling web pages</p>
-        <button className={styles.learnBtn} onClick={handleLearnClick}>Learn CSS</button>
+        <button className={styles.learnBtn}>Learn CSS</button>
         </div>
         <div className={styles.codeExample}>
           <h3>CSS Example:</h3>
@@ -70,7 +69,7 @@ function HomePage() {
         <div className={styles.titleBox}>
         <h1>JavaScript</h1>
         <p>The language for programming web pages</p>
-        <button className={styles.learnBtn} onClick={handleLearnClick}>Learn JavaScript</button>
+        <button className={styles.learnBtn} >Learn JavaScript</button>
         </div>
         <div className={styles.codeExample}>
           <h3>JavaScript Example:</h3>

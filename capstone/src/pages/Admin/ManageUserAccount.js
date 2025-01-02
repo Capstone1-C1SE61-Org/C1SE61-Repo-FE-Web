@@ -1,18 +1,65 @@
-import React, { useState } from 'react';
-import styles from './ManageUserAccount.module.css'; 
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTachometerAlt, faUsers, faBook, faComments, faUsersCog, faLifeRing, faBars, faEye, faTrash, faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import styles from './ManageUserAccount.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function ManageUserAccount() {
+  const [customers, setCustomers] = useState([]); 
   const [modalData, setModalData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const openModal = (name, username, phone, email, avatar) => {
-    setModalData({ name, username, phone, email, avatar });
+  useEffect(() => {
+    fetchCustomers(currentPage);
+  }, [currentPage]);
+
+  const fetchCustomers = async (page) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('No token found. Redirect to login or handle authentication.');
+        return;
+      }
+
+      const response = await axios.get(`http://localhost:8080/api/v1/customer?page=${page}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data && response.data.content) {
+        setCustomers(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } else {
+        console.error('Invalid response format:', response.data);
+        setCustomers([]);
+      }
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      setCustomers([]);
+    }
+  };
+
+  const openModal = (customer) => {
+    setModalData(customer);
   };
 
   const closeModal = () => {
     setModalData(null);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const [isSidebarHidden, setSidebarHidden] = useState(false);
@@ -35,52 +82,37 @@ function ManageUserAccount() {
   const handleAdminPage = () => {
     navigate('/admin');
   };
+
   const handleManageInstructor = () => {
     navigate('/manageinstructor');
-  }
+  };
+
   const handleAdminManageCourse = () => {
     navigate('/adminmanagecourse');
-  }
-
-  const users = [
-    {
-      name: 'Văn Tâm',
-      username: 'vantam',
-      phone: '+91 385 102 6418',
-      email: 'kicadat478@gmail.com',
-      avatar: 'https://placehold.co/100x100',
-    },
-    {
-      name: 'BESTAM',
-      username: 'bestam',
-      phone: '+91 385 585 2058',
-      email: 'kingg.holbrook@gmail.com',
-      avatar: 'https://placehold.co/100x100',
-    },
-  ];
+  };
 
   return (
-    <div className={styles.accountManagement}>
+    <div className={styles.manageUserAccount}>
       <div className={`${styles.sidebar} ${isSidebarHidden ? styles.hidden : ""}`}>
         <h1 style={{ fontSize: "40px", fontWeight: "bold" }}>P3L</h1>
         <a href="#" onClick={handleAdminPage}>
-          <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt} style={{marginRight:"10px"}} /> Dashboard
         </a>
         <a href="#" onClick={toggleSubmenu}>
-          <FontAwesomeIcon icon={faUsers} /> Manage account
+          <FontAwesomeIcon icon={faUsers} style={{marginRight:"10px"}}/> Manage account
         </a>
         <div className={`${styles.submenu} ${isSubmenuVisible ? styles.visible : ""}`}>
           <a href="#" onClick={handleManageUser}>User account</a>
           <a href="#" onClick={handleManageInstructor}>Instructor account</a>
         </div>
         <a href="#" onClick={handleAdminManageCourse}>
-          <FontAwesomeIcon icon={faBook} /> Manage course
+          <FontAwesomeIcon icon={faBook} style={{marginRight:"10px"}} /> Manage course
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faComments} /> Manage feedback
+          <FontAwesomeIcon icon={faComments} style={{marginRight:"10px"}} /> Manage feedback
         </a>
         <a href="#">
-          <FontAwesomeIcon icon={faLifeRing} /> Support
+          <FontAwesomeIcon icon={faLifeRing} style={{marginRight:"10px"}} /> Support
         </a>
       </div>
 
@@ -95,7 +127,7 @@ function ManageUserAccount() {
               alt="Logo"
               height="100"
               width="100"
-              style={{ cursor: "pointer"}}
+              style={{ cursor: "pointer" }}
               onClick={handleAdminPage}
             />
             <span>
@@ -103,66 +135,68 @@ function ManageUserAccount() {
             </span>
           </div>
         </div>
-
         <div className={styles.content}>
           <h1>User Account Management</h1>
           <div className={styles.filters}>
             <input type="text" placeholder="Search..." />
           </div>
-          <div className={styles.tableContainer}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Actions</th>
-                  <th>Name</th>
-                  <th>Username</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, index) => (
-                  <tr key={index}>
-                    <td className={styles.actions}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Avatar</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers.length > 0 ? (
+                customers.map((customer) => (
+                  <tr key={customer.id}>
+                    <td>{customer.customerId}</td>
+                    <td>{customer.customerName}</td>
+                    <td>
+                      <img 
+                        src={customer.customerImg} 
+                        alt={customer.customerName} 
+                        style={{ width: '50px', height: '50px', borderRadius: '50%' }} 
+                      />
+                    </td>
+                    <td>{customer.customerPhone}</td>
+                    <td>{customer.customerEmail}</td>
+                    <td>
                       <FontAwesomeIcon
                         icon={faEye}
-                        onClick={ () =>
-                          openModal(
-                            user.name,
-                            user.username,
-                            user.phone,
-                            user.email,
-                            user.avatar
-                          )
-                        }
-                        style={{ cursor: "pointer" }}
+                        onClick={() => openModal(customer)}
+                        style={{ cursor: 'pointer' }}
                       />
                       <FontAwesomeIcon icon={faTrash} className={styles.delete} />
                     </td>
-                    <td>{user.name}</td>
-                    <td>{user.username}</td>
-                    <td>{user.phone}</td>
-                    <td>{user.email}</td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className={styles.pagination}>
-              <div className="info">1-25 of 100</div>
-              <div className="controls">
-                <FontAwesomeIcon icon={faAngleLeft} />
-                <FontAwesomeIcon icon={faAngleRight} />
-              </div>
-            </div>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6">No customers found.</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          <div className={styles.pagination}>
+            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+              Previous Page
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+              Next Page
+            </button>
           </div>
         </div>
 
         {modalData && (
           <div className={styles.modal} onClick={closeModal}>
-            <div
-              className={styles.modalContent}
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
               <div className={styles.modalHeader}>
                 <h2>User Details</h2>
                 <span className={styles.close} onClick={closeModal}>
@@ -170,23 +204,23 @@ function ManageUserAccount() {
                 </span>
               </div>
               <div className={styles.modalBody}>
-                <img
-                  src={modalData.avatar}
-                  alt="User avatar"
-                  height="100"
-                  width="100"
-                />
+                <div>
+                  <strong>Avatar:</strong>
+                  <br />
+                  <img 
+                    src={modalData.customerImg} 
+                    alt={modalData.customerName} 
+                    style={{ width: '100px', height: '100px', borderRadius: '50%' }} 
+                  />
+                </div>
                 <p>
-                  <strong>Name:</strong> {modalData.name}
+                  <strong>Name:</strong> {modalData.customerName}
                 </p>
                 <p>
-                  <strong>Username:</strong> {modalData.username}
+                  <strong>Phone:</strong> {modalData.customerPhone}
                 </p>
                 <p>
-                  <strong>Phone:</strong> {modalData.phone}
-                </p>
-                <p>
-                  <strong>Email:</strong> {modalData.email}
+                  <strong>Email:</strong> {modalData.customerEmail}
                 </p>
               </div>
             </div>
@@ -195,6 +229,6 @@ function ManageUserAccount() {
       </div>
     </div>
   );
-};
+}
 
 export default ManageUserAccount;
